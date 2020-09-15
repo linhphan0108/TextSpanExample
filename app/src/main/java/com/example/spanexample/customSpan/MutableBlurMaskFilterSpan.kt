@@ -1,4 +1,4 @@
-package com.example.spanexample
+package com.example.spanexample.customSpan
 
 import android.graphics.BlurMaskFilter
 import android.graphics.MaskFilter

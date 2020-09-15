@@ -1,5 +1,5 @@
 
-package com.example.spanexample
+package com.example.spanexample.screen
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -12,6 +12,9 @@ import android.util.Property
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.spanexample.customSpan.BackgroundDrawableTextSpan
+import com.example.spanexample.customSpan.MutableBlurMaskFilterSpan
+import com.example.spanexample.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -27,9 +30,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBackgroundDrawableTextSpan(){
         val text = "1 hello world"
-        val drawable = ContextCompat.getDrawable(this, R.drawable.background_gradient)
+        val drawable = ContextCompat.getDrawable(this,
+            R.drawable.background_gradient
+        )
         val textColor = Color.WHITE
-        val backgroundDrawableTextSpan = BackgroundDrawableTextSpan(drawable,  textColor, 16)
+        val backgroundDrawableTextSpan =
+            BackgroundDrawableTextSpan(
+                drawable,
+                32,
+                textColor,
+                16
+            )
         val spannableString = SpannableString(text)
         spannableString.setSpan(backgroundDrawableTextSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         txt.setText(spannableString, TextView.BufferType.SPANNABLE)
@@ -38,7 +49,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupBlurAnimation(){
         val text = "blur animation"
         val maxRadius = 16f
-        val span = MutableBlurMaskFilterSpan(maxRadius)
+        val span = MutableBlurMaskFilterSpan(
+            maxRadius
+        )
         val spannableString = SpannableString(text)
         spannableString.setSpan(span, 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         txt2.setText(spannableString, TextView.BufferType.SPANNABLE)

@@ -1,4 +1,4 @@
-package com.example.spanexample
+package com.example.spanexample.customSpan
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,7 +9,7 @@ import android.text.style.ReplacementSpan
 
 /**
  */
-class FrameSpan : ReplacementSpan() {
+class StrikeSpan(strokeWidth: Int) : ReplacementSpan() {
     private val mPaint: Paint = Paint()
     private var mWidth = 0
     override fun getSize(
@@ -19,7 +19,6 @@ class FrameSpan : ReplacementSpan() {
         end: Int,
         fm: FontMetricsInt?
     ): Int {
-        //return text with relative to the Paint
         mWidth = paint.measureText(text, start, end).toInt()
         return mWidth
     }
@@ -35,13 +34,15 @@ class FrameSpan : ReplacementSpan() {
         bottom: Int,
         paint: Paint
     ) {
-        //draw the frame with custom Paint
-        canvas.drawRect(x, top.toFloat(), x + mWidth, bottom.toFloat(), mPaint)
+        val centerY = (top + bottom) * 0.5f
+        canvas.drawText(text, start, end, x, y.toFloat(), paint)
+        canvas.drawLine(x, centerY, x + mWidth, centerY, mPaint)
     }
 
     init {
         mPaint.style = Paint.Style.STROKE
         mPaint.color = Color.BLUE
         mPaint.isAntiAlias = true
+        mPaint.strokeWidth = strokeWidth.toFloat()
     }
 }
