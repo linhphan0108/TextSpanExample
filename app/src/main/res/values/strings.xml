@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpanExample</string>
+    <string name="thanks_message"><annotation font="san_francisco_display_bold"><annotation custom="background_color">Thanks</annotation></annotation> <annotation replacement="user_name">usernamePlaceholder</annotation> for reading my blog post <annotation custom="android_icon"> </annotation>.</string>
 </resources>
